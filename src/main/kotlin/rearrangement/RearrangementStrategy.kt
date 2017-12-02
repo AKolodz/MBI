@@ -6,20 +6,18 @@ interface RearrangementStrategy {
 
 class DeletionInserter : RearrangementStrategy {
     override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String =
-            genome
-                    .filterIndexed { index, _ ->
-                        index !in startIndex..(startIndex + rearrangementLength - 1)
-                    }
+            genome.removeRange(startIndex, startIndex + rearrangementLength)
 }
 
 
 class InversionInserter : RearrangementStrategy {
-    override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String {
-        if ((genome.length - startIndex) <= rearrangementLength || startIndex >= genome.length || startIndex < 0)
-            throw IllegalArgumentException("Incorrect value of rearrangement length or starting point parameter")
-
-        return genome
-    }
+    override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String =
+            genome
+                    .substring(startIndex, startIndex + rearrangementLength)
+                    .reversed()
+                    .run {
+                        genome.replaceRange(startIndex, startIndex + rearrangementLength, this)
+                    }
 }
 
 class DuplicationInserter : RearrangementStrategy {
