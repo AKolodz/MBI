@@ -1,5 +1,7 @@
 package rearrangement
 
+import java.lang.StringBuilder
+
 interface RearrangementStrategy {
     fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String
 }
@@ -21,19 +23,14 @@ class InversionInserter : RearrangementStrategy {
 }
 
 class DuplicationInserter : RearrangementStrategy {
-    override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String {
-        if ((genome.length - startIndex) <= rearrangementLength || startIndex >= genome.length || startIndex < 0)
-            throw IllegalArgumentException("Incorrect value of rearrangement length or starting point parameter")
-
-        return genome
-    }
+    override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String =
+            genome + genome.substring(startIndex, startIndex + rearrangementLength)
 }
 
 class TranspositionInserter : RearrangementStrategy {
     override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String {
-        if ((genome.length - startIndex) <= rearrangementLength || startIndex >= genome.length || startIndex < 0)
-            throw IllegalArgumentException("Incorrect value of rearrangement length or starting point parameter")
-
-        return genome
+        val substring = genome.substring(startIndex, startIndex+rearrangementLength)
+        genome.removeRange(startIndex,startIndex+rearrangementLength)
+        return StringBuilder(genome).insert(random()!=startIndex,"").toString()
     }
 }
