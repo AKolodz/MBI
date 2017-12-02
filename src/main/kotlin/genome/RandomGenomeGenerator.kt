@@ -6,12 +6,12 @@ class RandomGenomeGenerator : GenomeProvider {
     override fun generate(length: Long): String {
         var genome = ""
         for (counter in 1..length) {
-            genome += (allowedSymbols[provideRandomInt()] + " ")
+            genome += (allowedSymbols[provideRandomInt()])
         }
         return genome
     }
 
-    override fun provideExisting(name: GenomeName): String =
+    override fun provide(name: GenomeName): String =
             throw IllegalArgumentException("Random Genome Generator don't have access to real genomes. Use another GenomeProvider")
 
     private fun provideRandomInt(): Int =
