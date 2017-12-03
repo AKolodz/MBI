@@ -13,10 +13,9 @@ class RealGenomeProvider(private val fileInteractor: FileInteractor) : GenomePro
     override fun provide(name: GenomeName): String =
             genomes[name]
                     .run {
-                        if (this != null)
-                            fileInteractor.readFrom(this)
-                        else
+                        if (this == null)
                             throw IllegalArgumentException("Filename for chosen genome name doesn't exist")
+                        fileInteractor.readFrom(this)
                     }
 
     override fun generate(length: Long): String =
