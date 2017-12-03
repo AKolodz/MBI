@@ -1,12 +1,14 @@
+import file_interactor.FileInteractorImpl
+import genome.GenomeName
+import genome.GenomeServiceImpl
 import genome.RandomGenomeGenerator
-import rearrangement.RearrangementType
-import rearrangement.RearrangementsMaker
 
 fun main(args: Array<String>) {
-    val genomeGenerator: RandomGenomeGenerator = RandomGenomeGenerator()
+    val genomeGenerator = RandomGenomeGenerator()
     println(genomeGenerator.generate(20))
 
-    val rearranger = RearrangementsMaker()
-    val string = rearranger.rearrange("Genom", 2, 1, RearrangementType.TRANSPOSITION)
-    println(string)
+    val service = GenomeServiceImpl(FileInteractorImpl())
+    service.save(GenomeName.ECOLI, "ECOLI")
+
+    println(service.load(GenomeName.ECOLI))
 }
