@@ -7,6 +7,6 @@ fun main(args: Array<String>) {
     println(genomeGenerator.generate(20))
 
     val rearranger = RearrangementsMaker()
-    val string = rearranger.rearrange("Genom", 1, 4, RearrangementType.TRANSPOSITION)
+    val string = rearranger.rearrange("Genom", 2, 1, RearrangementType.TRANSPOSITION)
     println(string)
 }

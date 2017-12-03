@@ -29,8 +29,21 @@ class DuplicationInserter : RearrangementStrategy {
 
 class TranspositionInserter : RearrangementStrategy {
     override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String {
-        val substring = genome.substring(startIndex, startIndex+rearrangementLength)
-        genome.removeRange(startIndex,startIndex+rearrangementLength)
-        return StringBuilder(genome).insert(random()!=startIndex,"").toString()
+        val transposition = genome.substring(startIndex, startIndex + rearrangementLength)
+        val base = genome.removeRange(startIndex, startIndex + rearrangementLength)
+        return StringBuilder(base)
+                .insert(provideRandIndex(base.length, startIndex), transposition)
+                .toString()
     }
+
+    private fun provideRandIndex(range: Int, exception: Int): Int =
+            Math.round(Math.random() * range).toInt()
+                    .run {
+                        if (this != exception)
+                            this
+                        else {
+                            provideRandIndex(range, exception)
+                        }
+                    }
 }
+
