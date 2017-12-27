@@ -1,6 +1,6 @@
 import file_interactor.FileInteractorImpl
 import genome.GenomeName
-import genome.GenomeServiceImpl
+import file_interactor.GenomeServiceImpl
 import genome.RandomGenomeGenerator
 
 fun main(args: Array<String>) {
@@ -8,7 +8,10 @@ fun main(args: Array<String>) {
     println(genomeGenerator.generate(20))
 
     val service = GenomeServiceImpl(FileInteractorImpl())
-    service.save(GenomeName.ECOLI, "ECOLI")
+    var y = service.load(GenomeName.CHROMOSOME_Y)
 
-    println(service.load(GenomeName.ECOLI))
+    y= y.filter { it.isLetter() }
+
+    service.save(GenomeName.CHROMOSOME_Y, y)
+    println(y)
 }

@@ -1,5 +1,6 @@
 package genome
 
+import file_interactor.GenomeService
 import java.lang.invoke.WrongMethodTypeException
 
 class RealGenomeProvider(private val service: GenomeService) : GenomeProvider {
@@ -11,5 +12,5 @@ class RealGenomeProvider(private val service: GenomeService) : GenomeProvider {
 }
 
 enum class GenomeName {
-    ECOLI
+    ECOLI, MS2, HIV, CHROMOSOME_Y
 }
