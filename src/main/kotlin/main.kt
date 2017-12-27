@@ -8,10 +8,10 @@ fun main(args: Array<String>) {
     println(genomeGenerator.generate(20))
 
     val service = GenomeServiceImpl(FileInteractorImpl())
-    var y = service.load(GenomeName.CHROMOSOME_Y)
+    var y = service.load(GenomeName.HIV)
 
     y= y.filter { it.isLetter() }
 
-    service.save(GenomeName.CHROMOSOME_Y, y)
+//    service.save(GenomeName.HIV, y)
     println(y)
 }
