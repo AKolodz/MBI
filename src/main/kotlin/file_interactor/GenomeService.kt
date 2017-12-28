@@ -19,16 +19,28 @@ class GenomeServiceImpl(private val interactor: FileInteractor) : GenomeService 
             )
 
     override fun save(fileName: GenomeName?, customFilename: String?, content: String) =
-            genomePaths[fileName].run {
-                if (this == null)
-                    throw IllegalArgumentException("No path for given genome name")
-                interactor.writeTo(this, content)
+            if (fileName != null) {
+                genomePaths[fileName].run {
+                    if (this == null)
+                        throw IllegalArgumentException("No path for given genome name")
+                    interactor.writeTo(this, content)
+                }
+            } else {
+                interactor.writeTo(customFilename
+                        ?: throw IllegalArgumentException("Both filenames can't be null"),
+                        content)
             }
 
     override fun load(fileName: GenomeName?, customFilename: String?): String =
-            genomePaths[fileName].run {
-                if (this == null)
-                    throw IllegalArgumentException("No path for given genome name")
-                interactor.readFrom(this)
+            if (fileName != null) {
+                genomePaths[fileName].run {
+                    if (this == null)
+                        throw IllegalArgumentException("No path for given genome name")
+                    interactor.readFrom(this)
+                }
+            } else {
+                interactor.readFrom(customFilename
+                        ?: throw IllegalArgumentException(" Both filenames can't be null"))
             }
+
 }
