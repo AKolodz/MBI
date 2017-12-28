@@ -3,8 +3,8 @@ package file_interactor
 import genome.GenomeName
 
 interface GenomeService {
-    fun save(name: GenomeName, content: String)
-    fun load(name: GenomeName): String
+    fun save(fileName: GenomeName? = null, customFilename: String? = null, content: String)
+    fun load(fileName: GenomeName? = null, customFilename: String? = null): String
 }
 
 class GenomeServiceImpl(private val interactor: FileInteractor) : GenomeService {
@@ -13,19 +13,20 @@ class GenomeServiceImpl(private val interactor: FileInteractor) : GenomeService 
                     GenomeName.ECOLI to "ecoli.txt",
                     GenomeName.MS2 to "virusMS2.txt",
                     GenomeName.HIV to "hiv.txt",
-                    GenomeName.CHROMOSOME_Y to "chromosomeY.txt"
-
+                    GenomeName.CHROMOSOME_Y to "chromosomeY.txt",
+                    GenomeName.BIG_RAND to "bigRand.txt",
+                    GenomeName.MEDIUM_RAND to "mediumRand.txt"
             )
 
-    override fun save(name: GenomeName, content: String) =
-            genomePaths[name].run {
+    override fun save(fileName: GenomeName?, customFilename: String?, content: String) =
+            genomePaths[fileName].run {
                 if (this == null)
                     throw IllegalArgumentException("No path for given genome name")
                 interactor.writeTo(this, content)
             }
 
-    override fun load(name: GenomeName): String =
-            genomePaths[name].run {
+    override fun load(fileName: GenomeName?, customFilename: String?): String =
+            genomePaths[fileName].run {
                 if (this == null)
                     throw IllegalArgumentException("No path for given genome name")
                 interactor.readFrom(this)

@@ -5,13 +5,19 @@ import genome.RandomGenomeGenerator
 
 fun main(args: Array<String>) {
     val genomeGenerator = RandomGenomeGenerator()
-    println(genomeGenerator.generate(20))
+//    val bigRandom = genomeGenerator.generate(500000)
+//    println(bigRandom)
+
 
     val service = GenomeServiceImpl(FileInteractorImpl())
-    var y = service.load(GenomeName.HIV)
+    var ecoli = service.load(GenomeName.ECOLI)
+    ecoli = ecoli.filter { it.isLetter() }
+    service.save(GenomeName.ECOLI, ecoli)
 
-    y= y.filter { it.isLetter() }
+//    var y = service.load(GenomeName.HIV)
+//
+//    y= y.filter { it.isLetter() }
 
 //    service.save(GenomeName.HIV, y)
-    println(y)
+//    println(y)
 }
