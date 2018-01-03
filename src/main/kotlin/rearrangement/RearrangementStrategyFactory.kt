@@ -1,7 +1,10 @@
 package rearrangement
 
+interface StrategyFactory{
+    fun provideStrategy(type: RearrangementType) : RearrangementStrategy
+}
 
-class RearrangementStrategyFactory {
+class RearrangementStrategyFactory : StrategyFactory {
 
     private val strategies: Map<RearrangementType, RearrangementStrategy> =
             mapOf(
@@ -11,7 +14,7 @@ class RearrangementStrategyFactory {
                     RearrangementType.TRANSPOSITION to TranspositionInserter()
             )
 
-    fun provideStrategy(type: RearrangementType): RearrangementStrategy =
+    override fun provideStrategy(type: RearrangementType): RearrangementStrategy =
             strategies[type] ?:
                     throw IllegalArgumentException()
 }
