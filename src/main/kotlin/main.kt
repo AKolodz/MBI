@@ -1,20 +1,21 @@
 import file_interactor.FileInteractorImpl
-import genome.GenomeName
 import file_interactor.GenomeServiceImpl
-import genome.RandomGenomeGenerator
+import genome.GenomeName
+import genome.GenomeProviderImpl
+import rearrangement.RearrangementStrategyFactory
+import rearrangement.RearrangementType
+import rearrangement.RearrangementsMaker
 
 fun main(args: Array<String>) {
-//    val genomeGenerator = RandomGenomeGenerator()
-//    val random = genomeGenerator.generate(50)
-//    println(bigRandom)
 
+    val rearrangementsMaker = RearrangementsMaker(RearrangementStrategyFactory())
     val service = GenomeServiceImpl(FileInteractorImpl())
-//    var ecoli = service.load(GenomeName.ECOLI)
-//    ecoli = ecoli.filter { it.isLetter() }
-//    var rand= service.load(null, "SmallRand")
+    val provider = GenomeProviderImpl(service)
 
-//    var y = service.load(GenomeName.HIV)
-//    service.save(GenomeName.HIV, y)
+    provider.provide(GenomeName.ECOLI)
+            .apply {
+                rearrangementsMaker.rearrange(this,10000,100000,RearrangementType.DUPLICATION)
+                        .apply { service.save("ecoli_10000_100000_dup",this) }
+            }
 
-//    println(rand)
 }
