@@ -1,5 +1,3 @@
-import file_interactor.FileInteractorImpl
-import file_interactor.GenomeServiceImpl
 import rearrangement.RearrangementStrategyFactory
 import rearrangement.RearrangementType
 import rearrangement.RearrangementsMaker
@@ -25,15 +23,8 @@ class MainFunctions {
                     rearrangedGenome
                 }
 
-
         private fun provideRandomInt(maxNumber: Int): Int =
                 Math.floor(Math.random() * (maxNumber + 1)).toInt()
-
-        fun addSingleTypeRearrangementsAndSave(genome: String, filename: String, numberOfRearrangements: Int, rearrangementLength: Int, step: Int, type: RearrangementType) {
-            val service = GenomeServiceImpl(FileInteractorImpl())
-            addOneTypeRearrangements(genome, numberOfRearrangements, rearrangementLength, step, type)
-                    .apply { service.save(filename, this) }
-        }
 
         fun addOneTypeRearrangements(genome: String,
                                      numberOfRearrangements: Int,
