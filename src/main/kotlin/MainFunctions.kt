@@ -26,11 +26,11 @@ class MainFunctions {
         private fun provideRandomInt(maxNumber: Int): Int =
                 Math.floor(Math.random() * (maxNumber + 1)).toInt()
 
-        fun addOneTypeRearrangements(genome: String,
-                                     numberOfRearrangements: Int,
-                                     rearrangementLength: Int,
-                                     step: Int,
-                                     type: RearrangementType): String =
+        fun addSpecifiedTypeRearrangements(genome: String,
+                                           numberOfRearrangements: Int,
+                                           rearrangementLength: Int,
+                                           step: Int,
+                                           type: RearrangementType): String =
                 genome.run {
                     val rearrangementsMaker = RearrangementsMaker(RearrangementStrategyFactory())
                     var rearrangedGenome = this

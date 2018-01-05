@@ -10,7 +10,7 @@ class GenomeProviderImpl(private val service: GenomeService) : GenomeProvider {
                     GenomeName.MS2 to "virusMS2.txt",
                     GenomeName.HIV to "hiv.txt",
                     GenomeName.CHROMOSOME_Y to "chromosomeY.txt",
-                    GenomeName.BIG_RAND to "bigRand.txt",
+                    GenomeName.RAND_500K to "rand500k.txt",
                     GenomeName.MEDIUM_RAND to "mediumRand.txt"
             )
 
