@@ -14,8 +14,7 @@ class DeletionInserter : RearrangementStrategy {
 
 class InversionInserter : RearrangementStrategy {
     override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String =
-            genome
-                    .substring(startIndex, startIndex + rearrangementLength)
+            genome.substring(startIndex, startIndex + rearrangementLength)
                     .reversed()
                     .run {
                         genome.replaceRange(startIndex, startIndex + rearrangementLength, this)
@@ -29,10 +28,10 @@ class DuplicationInserter : RearrangementStrategy {
 
 class TranspositionInserter : RearrangementStrategy {
     override fun rearrange(genome: String, startIndex: Int, rearrangementLength: Int): String {
-        val transposition = genome.substring(startIndex, startIndex + rearrangementLength)
+        val movingPart = genome.substring(startIndex, startIndex + rearrangementLength)
         val base = genome.removeRange(startIndex, startIndex + rearrangementLength)
         return StringBuilder(base)
-                .insert(provideRandIndex(base.length, startIndex), transposition)
+                .insert(provideRandIndex(base.length, startIndex), movingPart)
                 .toString()
     }
 

@@ -1,5 +1,11 @@
 package genome
 
+/**
+ * Class that provides genome sequences.
+ *
+ * @constructor Creates an instance of GenomeProviderImpl.
+ * @property service Calls for genomes from data source.
+ */
 class GenomeProviderImpl(private val service: GenomeLoader) : GenomeProvider {
 
     private val genomePaths: Map<GenomeName, String> =
@@ -13,6 +19,10 @@ class GenomeProviderImpl(private val service: GenomeLoader) : GenomeProvider {
                     GenomeName.RAND_50 to "genomes/rand50.txt"
             )
 
+    /**
+     * Provides nucleotide sequence saved under specific [filename] or filepath specified by [name].
+     * @return Nucleotide sequence.
+     */
     override fun provide(name: GenomeName?, filename: String?): String =
             if (name != null) {
                 service.load(genomePaths[name]
