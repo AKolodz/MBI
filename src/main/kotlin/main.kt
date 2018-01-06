@@ -1,23 +1,25 @@
 import file_interactor.FileInteractorImpl
+import file_interactor.GenomeService
 import genome.GenomeName
-import file_interactor.GenomeServiceImpl
-import genome.RandomGenomeGenerator
+import genome.GenomeProviderImpl
+import rearrangement.RearrangementType
 
 fun main(args: Array<String>) {
-    val genomeGenerator = RandomGenomeGenerator()
-//    val bigRandom = genomeGenerator.generate(500000)
-//    println(bigRandom)
+
+    val service = GenomeService(FileInteractorImpl())
+    val provider = GenomeProviderImpl(service)
+
+    val genome = provider.provide(filename = "aaa")
+            .apply { println(this) }
 
 
-    val service = GenomeServiceImpl(FileInteractorImpl())
-    var ecoli = service.load(GenomeName.ECOLI)
-    ecoli = ecoli.filter { it.isLetter() }
-    service.save(GenomeName.ECOLI, ecoli)
 
-//    var y = service.load(GenomeName.HIV)
-//
-//    y= y.filter { it.isLetter() }
-
-//    service.save(GenomeName.HIV, y)
-//    println(y)
+//    MainFunctions.addSpecifiedTypeRearrangements(genome, 1, 10, 500000, RearrangementType.INVERSION)
+//            .apply {
+//                service.save("rend500k_1x_500000i500000_10_inv", this)
+//            }
 }
+
+
+
+

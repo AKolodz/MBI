@@ -1,6 +1,5 @@
 package genome
 
 interface GenomeProvider {
-    fun generate(length: Long): String
-    fun provide(name: GenomeName): String
+    fun provide(name: GenomeName? = null, filename: String? = null): String
 }
