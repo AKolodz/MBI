@@ -1,11 +1,8 @@
 package file_interactor
 
-interface GenomeService {
-    fun save(fileName: String, content: String)
-    fun load(fileName: String): String
-}
+import genome.GenomeLoader
 
-class GenomeServiceImpl(private val interactor: FileInteractor) : GenomeService {
+class GenomeService(private val interactor: FileInteractor) : GenomeLoader, GenomePersistor {
 
     override fun save(fileName: String, content: String) =
             interactor.writeTo(fileName, content)

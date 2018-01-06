@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito
 
 @DisplayName("Given instance of an GenomeServiceImpl")
-internal class GenomeServiceImplTest{
+internal class GenomeServiceTest {
 
     private lateinit var fileInteractor : FileInteractor
-    private lateinit var service : GenomeServiceImpl
+    private lateinit var service : GenomeService
 
     @BeforeEach
     fun setUp(){
         fileInteractor = BDDMockito.mock(FileInteractor::class.java)
-        service = GenomeServiceImpl(fileInteractor)
+        service = GenomeService(fileInteractor)
     }
 
     @Nested
